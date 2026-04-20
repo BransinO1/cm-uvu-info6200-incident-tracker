@@ -19,9 +19,6 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-if not os.path.exists("instance"):
-    os.makedirs("instance")
-
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -45,8 +42,11 @@ class Incident(db.Model):
         return f"<Incident {self.title}>"
 
 # Create DB
-with app.app_context():
-    db.create_all()
+def init_db():
+    with app.app_context():
+        db.create_all()
+
+init_db()
 
 # HOME ROUTE
 @app.route("/")
