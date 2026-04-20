@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Incident</title>
+</head>
+<body>
+    <h1>Incident Log Tracker</h1>
+    <h2>Add New Incident</h2>
+
+    {% if error %}
+        <p style="color: red;"><strong>{{ error }}</strong></p>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('add_incident') }}">
+        <label for="title">Incident Title:</label><br>
+        <input type="text" id="title" name="title" value="{{ title|default('') }}" required><br><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" rows="4" cols="50" required>{{ description|default('') }}</textarea><br><br>
+
+        <label for="incident_date">Incident Date (YYYY-MM-DD):</label><br>
+        <input type="text" id="incident_date" name="incident_date" value="{{ incident_date|default('') }}" required><br><br>
+
+        <label for="reported_by">Reported By:</label><br>
+        <input type="text" id="reported_by" name="reported_by" value="{{ reported_by|default('') }}" required><br><br>
+
+        <button type="submit">Save Incident</button>
+    </form>
+
+    <p><a href="{{ url_for('home') }}">View All Incidents</a></p>
+</body>
+</html>

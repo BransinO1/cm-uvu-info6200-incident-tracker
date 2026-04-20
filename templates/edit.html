@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Incident</title>
+</head>
+<body>
+    <h1>Edit Incident</h1>
+
+    <form method="POST">
+        <label>Title:</label><br>
+        <input type="text" name="title" value="{{ incident.title }}" required><br><br>
+
+        <label>Description:</label><br>
+        <input type="text" name="description" value="{{ incident.description }}" required><br><br>
+
+        <label>Date:</label><br>
+        <input type="text" name="incident_date" value="{{ incident.incident_date }}" required><br><br>
+
+        <label>Reported By:</label><br>
+        <input type="text" name="reported_by" value="{{ incident.reported_by }}" required><br><br>
+
+        <label>Status:</label><br>
+            <select name="status" required>
+                <option value="Open" {% if incident.status == "Open" %}selected{% endif %}>Open</option>
+                <option value="In Progress" {% if incident.status == "In Progress" %}selected{% endif %}>In Progress</option>
+                <option value="Resolved" {% if incident.status == "Resolved" %}selected{% endif %}>Resolved</option>
+            </select><br><br>
+
+        <button type="submit">Update Incident</button>
+    </form>
+
+    <br>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>

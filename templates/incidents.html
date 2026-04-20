@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Incident Log Tracker</title>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <div style="display:flex; justify-content: space-between; align-items:center;">
+        <div>
+            <h1>Incident Log Tracker</h1>
+            <p>Logged in as: {{ user.username }}</p>
+        </div>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <hr>
+
+    <!-- Add New Incident -->
+    <p><a href="{{ url_for('add_incident') }}">Add New Incident</a></p>
+
+    <!-- Incident List -->
+    {% if incidents %}
+        {% for incident in incidents %}
+            <div style="border: 1px solid black; padding: 10px; margin-bottom: 10px;">
+                <h2>{{ incident.title }}</h2>
+                <p><strong>ID:</strong> {{ incident.incident_id }}</p>
+                <p><strong>Description:</strong> {{ incident.description }}</p>
+                <p><strong>Date:</strong> {{ incident.incident_date }}</p>
+                <p><strong>Status:</strong> {{ incident.status }}</p>
+                <p><strong>Reported By:</strong> {{ incident.reported_by }}</p>
+                <p><strong>Created At:</strong> {{ incident.created_at }}</p>
+                <p><strong>Updated At:</strong> {{ incident.updated_at }}</p>
+
+                <p>
+                    <a href="{{ url_for('edit_incident', incident_id=incident.incident_id) }}">Edit</a>
+                    |
+                    <a href="{{ url_for('delete_incident', incident_id=incident.incident_id) }}">Delete</a>
+                </p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No incidents have been recorded yet.</p>
+    {% endif %}
+
+</body>
+</html>
